@@ -25,11 +25,11 @@ class vBulletin_Reader(object):
         """
         Returns the direct text of the post, avoids the children text
         """
-        print(post)
-        post_text =  [text.text if type(text) == bs4.element.Tag else text for text in post.contents]
-        post_text = list(filter(None, map(lambda x: x.strip(), post_text)))
+        if post:
+            post_text =  [text.text if type(text) == bs4.element.Tag else text for text in post.contents]
+            post_text = list(filter(None, map(lambda x: x.strip(), post_text)))
 
-        return post_text
+            return post_text
     
     def parse_thread(self, thread_link):
         """
@@ -40,10 +40,11 @@ class vBulletin_Reader(object):
         if req.status_code == 200:
             data = BeautifulSoup(req.content, "html.parser")
             posts = map(lambda x: x.blockquote, data.find(id="posts").find_all("li", recurisve=False))
-            post_messages = map(lambda x: self._parse_post_message(x), posts)
+            post_messages = filter(None, map(lambda x: self._parse_post_message(x), posts))
 
             for post_message in post_messages:
                 print(post_message)
+                
         else:
             print("Something's wrong, check the thread link.")
 
