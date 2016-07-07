@@ -1,13 +1,15 @@
 vBulletin CLI Reader
 =========================
 
-This is a small python program that takes a link to a vBulletin thread, keeps track of how much you've read, and presents you with new posts every time you run `vbr [thread name]`.
+This is a small python program that takes a link to a vBulletin thread, keeps track of how much you've read, and presents you with new posts every time you run `vbr [thread name]`. 
 
 How?
 ---------------------------
 	$ pip install vbulletin-reader
 	$ vbr [thread url] [thread name]
 	$ vbr [thread name]
+	
+vbulletin-reader stores your thread location in a nicely wrapped json file in your home directory `~/" by default. 
 	
 Why?
 --------------------------
